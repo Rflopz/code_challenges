@@ -1,9 +1,9 @@
 function search ( numToSearch, arrayToSearch, startIndex = null, endIndex = null, isSorted = false ) {
 
-    if ( ! isSorted ) {
-        arrayToSearch = arrayToSearch.sort( (a, b) => a - b );
-        console.table( arrayToSearch )
-    } 
+    if   ( ! isSorted ) {
+          arrayToSearch = arrayToSearch.sort( (a, b) => a - b );
+          console.table( arrayToSearch )
+      } 
 
     if ( startIndex === null ) 
         startIndex = 0;

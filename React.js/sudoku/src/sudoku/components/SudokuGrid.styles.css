@@ -32,7 +32,8 @@
 }
 
 .cell:focus-within {
- border: 3px solid #207e9c;
+ /* border: 3px solid #207e9c; */
+ background-color: #10566c;
 }
 
 .cell input {

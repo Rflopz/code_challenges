@@ -48,22 +48,23 @@ const SudokuGrid = () => {
       const row = parseInt(pos[0]);
       const col = parseInt(pos[1]);
 
+      console.log("move with " + e.key, focus);
       switch (e.key) {
         case "j":
         case "s":
-          if (row + 1 < grid.length) setFocus([row + 1, col].join(""));
+          if (row < grid.length - 1) setFocus([row + 1, col].join(""));
           break;
         case "k":
         case "w":
-          if (row + 1 < grid.length) setFocus([row - 1, col].join(""));
+          if (row > 0) setFocus([row - 1, col].join(""));
           break;
         case "h":
         case "a":
-          if (col + 1 < grid[0].length) setFocus([row, col - 1].join(""));
+          if (col > 0) setFocus([row, col - 1].join(""));
           break;
         case "l":
         case "d":
-          if (col + 1 < grid[0].length) setFocus([row, col + 1].join(""));
+          if (col < grid[0].length - 1) setFocus([row, col + 1].join(""));
           break;
       }
     },
@@ -80,6 +81,7 @@ const SudokuGrid = () => {
               row={rowIndex}
               isValid={isValid(cell.value, rowIndex, cellIndex)}
               focus={focus}
+              setFocus={setFocus}
               cell={cellIndex}
               value={cell.value}
               onChange={handleOnChange}

@@ -2,6 +2,8 @@
  display: flex;
  justify-content: center;
  align-items: center;
+ flex-direction: column; 
+ gap: 25px;
 }
 
 .grid {
@@ -32,7 +34,6 @@
 }
 
 .cell:focus-within {
- /* border: 3px solid #207e9c; */
  background-color: #10566c;
 }
 
@@ -46,4 +47,20 @@
 
 .cell.invalid {
  border: 3px solid red;
+}
+
+.actions {
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center;
+ gap: 25px;
+}
+
+button.clear {
+ background-color: #737373;
+}
+
+button.save {
+ background-color: #10566c;
 }

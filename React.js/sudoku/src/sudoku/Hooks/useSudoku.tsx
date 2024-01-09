@@ -33,7 +33,8 @@ const useSudoku = () => {
   );
 
   const handleOnChange = useCallback(
-    (row: number, col: number, val: number) => {
+    (position: [x: number, y: number], val: number) => {
+      const [row, col] = position;
       if (!Number.isNaN(val))
         setGrid((current) => {
           current[row][col] = {
@@ -87,11 +88,9 @@ const useSudoku = () => {
           row.map((col, y) => (
             <GridCell
               key={`${x}_${y}`}
-              row={x}
+              position={[x, y]}
               isValid={isValid(col.value, x, y)}
-              focus={position}
-              setFocus={setPosition}
-              cell={y}
+              focus={{ value: position, set: setPosition }}
               value={col.value}
               onChange={handleOnChange}
               onKeyDown={handleKeyDown}

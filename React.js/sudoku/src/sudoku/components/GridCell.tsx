@@ -1,45 +1,41 @@
 import { useEffect, useRef } from "react";
 
 type TGridCell = {
-  row: number;
-  cell: number;
+  position: [x: number, y: number];
   value: number;
   isValid: boolean;
-  focus: string;
-  setFocus(focus: string): void;
-  onChange(row: number, col: number, val: number): void;
+  focus: { value: string; set(pos: string): void };
+  onChange(position: [x: number, y: number], val: number): void;
   onKeyDown(e: React.KeyboardEvent<HTMLInputElement>): void;
 };
 
 const GridCell = ({
-  row,
-  cell,
+  position,
   value,
   isValid,
   focus,
-  setFocus,
   onChange,
   onKeyDown,
 }: TGridCell) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const pos = [row, cell].join("");
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    onChange(row, cell, parseInt(e.target.value.slice(-1)));
+    onChange(position, parseInt(e.target.value.slice(-1)));
   }
 
   const handleFocus = () => {
-    setFocus(pos);
+    focus.set(position.join(""));
   };
 
   useEffect(() => {
-    if (inputRef.current && focus === pos) inputRef.current.focus();
-  }, [inputRef, focus, pos]);
+    if (inputRef.current && focus.value === position.join(""))
+      inputRef.current.focus();
+  }, [inputRef, focus, position]);
 
   return (
     <div
       className={`cell 
-        ${row % 3 === 2 ? "row" : ""} 
+        ${position[0] % 3 === 2 ? "row" : ""} 
         ${!isValid ? "invalid" : ""}`}
     >
       <input

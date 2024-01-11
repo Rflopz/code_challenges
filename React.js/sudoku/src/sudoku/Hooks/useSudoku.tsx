@@ -1,36 +1,10 @@
 import { useCallback, useMemo, useState } from "react";
 import GridCell from "../components/GridCell";
 
-const getRandomInitials = (n: number) => {
-  const list: { [key: string]: number } = {};
-  for (let x = 0; x <= n; x++) {
-    const row = Math.floor(Math.random() * 9);
-    const col = Math.floor(Math.random() * 9);
-
-    list[`${row}${col}`] = Math.floor(Math.random() * 9);
-  }
-
-  return list;
-};
-const getInitialGrid = () => {
-  const randomInitials = getRandomInitials(5);
-
-  const grid = Array.from(Array(9), () =>
-    new Array(9).fill({ value: 0, enabled: true })
-  );
-
-  for (const [key, val] of Object.entries(randomInitials)) {
-    const [row, col] = key.split("").map((x) => parseInt(x));
-    grid[row][col] = { value: val, enabled: false };
-  }
-
-  return grid;
-};
-
-const initialPosition = "00";
+import { initialPosition, getGrid } from "../helpers/sudoku";
 
 const useSudoku = () => {
-  const [grid, setGrid] = useState(getInitialGrid());
+  const [grid, setGrid] = useState(getGrid());
   const [position, setPosition] = useState(initialPosition);
 
   const isValid = useCallback(
@@ -69,7 +43,7 @@ const useSudoku = () => {
   );
 
   const handleClearGrid = () => {
-    setGrid(getInitialGrid());
+    setGrid(getGrid());
     setPosition(initialPosition);
   };
 
